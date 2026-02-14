@@ -1,0 +1,21 @@
+# PowerShell / VS Code
+.vscode/
+*.code-workspace
+*.ps1.xml
+
+# System Files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Temporary / Log Files
+*.log
+*.tmp
+GovernorLog.txt
+
+# Pester (Testing)
+TestResults/
+*.visualstudio.com
+
+# User Specific
+*.user
