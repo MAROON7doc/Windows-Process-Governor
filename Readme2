@@ -1,0 +1,66 @@
+# ⚡ Windows Process Governor
+
+> **Automate your system's responsiveness.**
+> A lightweight PowerShell utility that dynamically boosts your active window's CPU priority and keeps your system clean in the background.
+
+![Platform](https://img.shields.io/badge/Platform-Windows-blue) ![Language](https://img.shields.io/badge/Language-PowerShell-5391FE) ![License](https://img.shields.io/badge/License-MIT-green)
+
+---
+
+## 🚀 What Does It Do?
+
+**Windows Process Governor** is a "set it and forget it" utility. Instead of manually tweaking Task Manager, this script runs in the background and acts as a traffic controller for your CPU.
+
+### 🎯 Core Features
+
+* **⚡ Dynamic Focus Boosting**
+    Automatically detects the window you are using (Foreground) and switches its process priority to **High**. When you tab away, it instantly drops it back to **Normal**.
+    
+* **🛡️ Smart & Safe**
+    Built with **Smart Polling** to ensure the script itself uses 0% CPU. It caches window handles and only acts when you actually switch tasks.
+
+* **🧹 Auto-Maintenance**
+    Every 60 seconds, it runs a silent health check:
+    * **Service Watchdog:** Restarts critical services like Audio, Spooler, and Windows Update if they crash.
+    * **Disk Hygiene:** Automatically cleans `%TEMP%` files if your C: drive drops below 10GB free space.
+
+* **✨ Graceful Exit (Undo Mode)**
+    Closing the script (via `Ctrl+C`) triggers a cleanup routine that **undoes all changes**, resetting your processes to their default state.
+
+---
+
+## 🛠️ Installation & Usage
+
+### Option 1: The Quick Way
+1.  **Download** the `ProcessGovernor.ps1` file.
+2.  **Right-Click** the file and select `Run with PowerShell`.
+3.  **Accept** the Administrator prompt (Required to change system priorities).
+4.  **Minimize** the window and enjoy a snappier PC!
+
+### Option 2: Command Line (Power Users)
+```powershell
+git clone [https://github.com/YOUR_USERNAME/Windows-Process-Governor.git](https://github.com/YOUR_USERNAME/Windows-Process-Governor.git)
+cd Windows-Process-Governor
+.\ProcessGovernor.ps1
+
+---
+⚙️ Configuration
+You can tweak the settings at the top of the script file to fit your needs:
+
+$Config = @{
+    # Where to save the log file
+    LogFile          = "$env:TEMP\GovernorLog.txt"
+    
+    # Services to keep alive
+    CriticalServices = @("Audiosrv", "Spooler", "wuauserv") 
+    
+    # Clean temp files if disk space is below this (GB)
+    MinDiskSpaceGB   = 10 
+}
+
+---
+📝 License
+This project is licensed under the MIT License - feel free to use, modify, and distribute it.
+
+⚠️ Disclaimer
+Use at your own risk. This tool modifies system process priorities in real-time. While it includes safety checks to prevent system instability, it is recommended to test it with your specific workflow.
